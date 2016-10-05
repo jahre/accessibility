@@ -1,34 +1,143 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
     <head>
-        <meta charset='utf-8'>
+        <meta charset="utf-8">
         <title>Accessibility</title>
-        <link href='css/normalize.css' rel='stylesheet'>
-        <link href='css/main.css' rel='stylesheet'>
+        <link href="css/normalize.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+        <script src="js/jquery-1.11.3.min.js"></script>
         <style>
             .menu-wrapper {
                 width: 275px;
                 background: #f3f3f3;
                 border: 1px solid #cccbcb;
+                box-sizing: border-box;
             }
-            .menu-name {
+            .menu-title {
                 color: #212121;
                 font-size: 12px;
                 font-weight: 700;
-                padding: 10px 25px;
                 border-bottom: 1px solid #cccbcb;
+                margin: 0 25px;
+                padding:15px 0;
             }
+            ul {
+                padding: 0;
+                margin: 0;
+                width: 100%;
+            }
+            .flyoutMenu_item {
+                list-style: none;
+                border-left: 4px solid transparent;
+                box-sizing: border-box;
+                position:relative;
+            }
+            
+           
+            .relative {
+                position:relative;
+            }
+
+            .flyoutMenu_mainItemLink {
+                color:#145da4;
+                text-decoration: none;
+                font-size:12px;
+                line-height: 34px;
+                display: block;
+                padding-left:25px;
+                margin-right:34px;
+                box-sizing:border-box;
+            }
+
+            .flyoutMenu_arrow {
+                position:absolute;
+                right:0;
+                top: 0;
+                color:#145da4;
+                display:inline-block;
+                text-decoration: none;
+                font-size:18px;
+                line-height: 34px;
+                text-align: center;
+                width: 34px;
+            }
+            .flyoutMenu_group {
+                position:absolute;
+                left:100%;
+                top: 0;
+                background: #f3f3f3;
+                width:275px;
+            }
+            .is_hidden {
+                display:none;
+            }
+            .is_selected {
+               background: #494949;
+               border-left: 4px solid #f6872b;
+            }
+            .level1 > .flyoutMenu_item.is_selected > .relative > .flyoutMenu_mainItemLink, 
+            .level1 > .flyoutMenu_item.is_selected > .relative > .flyoutMenu_arrow {
+               color: #fff;
+            }
+
         </style>
+        <script>
+            $(document).ready(function () {
+                $('.level1 > .flyoutMenu_item .flyoutMenu_mainItemLink').on('focus', function (e) {
+                    $('.level1 > .flyoutMenu_item').addClass('is_selected');
+                });
+
+                $('.level1 > .flyoutMenu_item .flyoutMenu_mainItemLink').on('mouseover', function (e) {
+                    $('.level1 > .flyoutMenu_item').addClass('is_selected');
+                    $('.flyoutMenu_group').removeClass('is_hidden');
+                });
+
+                $('.level1 > .flyoutMenu_item .flyoutMenu_arrow').on('keydown click', function (e) {
+                    $('.flyoutMenu_group').removeClass('is_hidden');
+                });
+
+                $('.level1 > .flyoutMenu_item').on('mouseleave', function (e) {
+                    $('.flyoutMenu_group').addClass('is_hidden');
+                    $('.level1 > .flyoutMenu_item').removeClass('is_selected');
+                });
+            });
+        </script>
     </head>
     <body>
-        <div class='menu-wrapper'>
-            <h2 class='menu-name'>BROWSE BY TASK</h2>
-            <ul class='level1'>
-                <li class='flyoutMenu_item'>
-                1
+        <div class="menu-wrapper">
+            <h2 class="menu-title">BROWSE BY TASK</h2>
+            <ul class="level1">
+                <li class="flyoutMenu_item">
+                    <div class="relative">
+                           <a href="#" class="flyoutMenu_mainItemLink">Substantive Basis</a>
+                           <a href="#" class="flyoutMenu_arrow">></a>
+                    </div>
+                    <div class="flyoutMenu_group is_hidden">
+                        <ul class="level2">
+                            <li class="flyoutMenu_item">
+                                <div class="relative">
+                                    <a href="#" class="flyoutMenu_mainItemLink">1</a>
+                                    <a href="#" class="flyoutMenu_arrow">></a>
+                                </div>
+                            </li>
+                            <li class="flyoutMenu_item">
+                                <div class="relative">
+                                    <a href="#" class="flyoutMenu_mainItemLink">2</a>
+                                    <a href="#" class="flyoutMenu_arrow">></a>
+                                </div>
+                            </li>
+                            <li class="flyoutMenu_item">
+                                <div class="relative">
+                                    <a href="#" class="flyoutMenu_mainItemLink">3</a>
+                                    <a href="#" class="flyoutMenu_arrow">></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
+    
             </ul>
         </div>
-        <script src='js/main.js'></script>
+        <script src="js/main.js"></script>
     </body>
 </html>
