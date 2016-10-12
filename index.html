@@ -71,73 +71,482 @@
             .is_hidden {
                 display:none;
             }
-            .is_selected {
+            .level1 > .is_selected {
                background: #494949;
                border-left: 4px solid #f6872b;
             }
+            .level2 .is_selected {
+               background: #dee3e8;
+            }
+
             .level1 > .flyoutMenu_item.is_selected > .relative > .flyoutMenu_mainItemLink, 
             .level1 > .flyoutMenu_item.is_selected > .relative > .flyoutMenu_arrow {
                color: #fff;
             }
 
+            /*.level2 .flyoutMenu_item:hover{
+                background: #dee3e8;
+            }*/
+
         </style>
         <script>
             $(document).ready(function () {
-                $('.level1 > .flyoutMenu_item .flyoutMenu_mainItemLink').on('focus', function (e) {
-                    $('.level1 > .flyoutMenu_item').addClass('is_selected');
-                });
-
-                $('.level1 > .flyoutMenu_item .flyoutMenu_mainItemLink').on('mouseover', function (e) {
-                    $('.level1 > .flyoutMenu_item').addClass('is_selected');
-                    $('.flyoutMenu_group').removeClass('is_hidden');
-                });
-
-                $('.level1 > .flyoutMenu_item .flyoutMenu_arrow').on('keydown click', function (e) {
-                    $('.flyoutMenu_group').removeClass('is_hidden');
-                });
-
-                $('.level1 > .flyoutMenu_item').on('mouseleave', function (e) {
-                    $('.flyoutMenu_group').addClass('is_hidden');
+                $('.level1 > .flyoutMenu_item > .relative .flyoutMenu_mainItemLink, .level1 > .flyoutMenu_item > .relative .flyoutMenu_arrow').on('focus', function (e) {
                     $('.level1 > .flyoutMenu_item').removeClass('is_selected');
+                    $(this).closest('.flyoutMenu_item').addClass('is_selected');
                 });
+
+                $('.flyoutMenu_item').on('mouseover', function () {
+                    $(this).addClass('is_selected');
+                    $(this).children('.flyoutMenu_group').removeClass('is_hidden');
+                });
+
+                $('.flyoutMenu_item').on('mouseleave', function () {
+                    $(this).removeClass('is_selected');
+                    $(this).children('.flyoutMenu_group').addClass('is_hidden');
+                });
+
+                $('.flyoutMenu_arrow').on('keydown click', function (e) {
+                    if (event.keyCode == 13) {
+                        if ($(this).closest('.flyoutMenu_item').children('.flyoutMenu_group').hasClass('is_hidden')){
+                            $(this).closest('.flyoutMenu_item').siblings().find('.flyoutMenu_group').addClass('is_hidden');
+                            $(this).closest('.flyoutMenu_item').children('.flyoutMenu_group').removeClass('is_hidden');
+                        }else{
+                            $(this).closest('.flyoutMenu_item').find('.flyoutMenu_group').addClass('is_hidden');
+                        }  
+                    }
+                });
+                
             });
         </script>
     </head>
     <body>
-        <div class="menu-wrapper">
-            <h2 class="menu-title">BROWSE BY TASK</h2>
-            <ul class="level1">
-                <li class="flyoutMenu_item">
-                    <div class="relative">
-                           <a href="#" class="flyoutMenu_mainItemLink">Substantive Basis</a>
-                           <a href="#" class="flyoutMenu_arrow">></a>
-                    </div>
-                    <div class="flyoutMenu_group is_hidden">
-                        <ul class="level2">
-                            <li class="flyoutMenu_item">
-                                <div class="relative">
-                                    <a href="#" class="flyoutMenu_mainItemLink">1</a>
-                                    <a href="#" class="flyoutMenu_arrow">></a>
-                                </div>
-                            </li>
-                            <li class="flyoutMenu_item">
-                                <div class="relative">
-                                    <a href="#" class="flyoutMenu_mainItemLink">2</a>
-                                    <a href="#" class="flyoutMenu_arrow">></a>
-                                </div>
-                            </li>
-                            <li class="flyoutMenu_item">
-                                <div class="relative">
-                                    <a href="#" class="flyoutMenu_mainItemLink">3</a>
-                                    <a href="#" class="flyoutMenu_arrow">></a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-    
-            </ul>
-        </div>
-        <script src="js/main.js"></script>
-    </body>
+    <div class='menu-wrapper'>
+        <h2 class='menu-title'>BROWSE BY TASK</h2>
+        <!--/////////////Level 1/////////////-->
+        <ul class='level1'>
+            <li class='flyoutMenu_item'>
+                <div class='relative'>
+                    <a class='flyoutMenu_mainItemLink' href='#'>Substantive Basis</a>
+                    <a class='flyoutMenu_arrow' href='#'>></a>
+                </div>
+                <div class='flyoutMenu_group is_hidden'>
+                    <ul class='level2'>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>Shark Dodson</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>The safe</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>New York</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class='flyoutMenu_item'>
+                <div class='relative'>
+                    <a class='flyoutMenu_mainItemLink' href='#'>Substantive Basis</a>
+                    <a class='flyoutMenu_arrow' href='#'>></a>
+                </div>
+                <div class='flyoutMenu_group is_hidden'>
+                    <ul class='level2'>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>Shark Dodson</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>The safe</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>New York</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class='flyoutMenu_item'>
+                <div class='relative'>
+                    <a class='flyoutMenu_mainItemLink' href='#'>Substantive Basis</a>
+                    <a class='flyoutMenu_arrow' href='#'>></a>
+                </div>
+                <div class='flyoutMenu_group is_hidden'>
+                    <ul class='level2'>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>Shark Dodson</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>The safe</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>New York</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class='flyoutMenu_item'>
+                <div class='relative'>
+                    <a class='flyoutMenu_mainItemLink' href='#'>Substantive Basis</a>
+                    <a class='flyoutMenu_arrow' href='#'>></a>
+                </div>
+                <div class='flyoutMenu_group is_hidden'>
+                    <ul class='level2'>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>Shark Dodson</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>The safe</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>New York</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class='flyoutMenu_item'>
+                <div class='relative'>
+                    <a class='flyoutMenu_mainItemLink' href='#'>Substantive Basis</a>
+                    <a class='flyoutMenu_arrow' href='#'>></a>
+                </div>
+                <div class='flyoutMenu_group is_hidden'>
+                    <ul class='level2'>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>Shark Dodson</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>The safe</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>New York</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class='flyoutMenu_item'>
+                <div class='relative'>
+                    <a class='flyoutMenu_mainItemLink' href='#'>Substantive Basis</a>
+                    <a class='flyoutMenu_arrow' href='#'>></a>
+                </div>
+                <div class='flyoutMenu_group is_hidden'>
+                    <ul class='level2'>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>Shark Dodson</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>The safe</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class='flyoutMenu_item'>
+                            <div class='relative'>
+                                <a class='flyoutMenu_mainItemLink' href='#'>New York</a>
+                                <a class='flyoutMenu_arrow' href='#'>></a>
+                            </div>
+                            <div class='flyoutMenu_group is_hidden'>
+                                <ul class='level3'>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Same here</a>
+                                        </div>
+                                    </li>
+                                    <li class='flyoutMenu_item'>
+                                        <div class='relative'>
+                                            <a class='flyoutMenu_mainItemLink' href='#'>Wall Street</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script src='js/main.js'></script>
+</body>
 </html>
